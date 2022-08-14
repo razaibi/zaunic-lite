@@ -1,0 +1,17 @@
+<html>
+	<head>
+		<title>Sample HTML Generation</title>
+	</head>
+	<body>
+    Name: {{.data.name}}
+    Something Other Value: {{.somethingElse}}
+
+	{{range  .data.options}}
+		<li>Product Price : {{.item}}</li>
+		{{range  .points}}
+			<li>Product Price : {{.name}}</li>
+		{{end}}
+	{{end}}
+
+	</body>
+</html>

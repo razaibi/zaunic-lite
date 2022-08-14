@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
+	"zaunic-lite/core"
 )
 
 func main() {
-	fmt.Println("Hello Zaunic Lite")
+	core.ProcessWorksheet("sample")
 }

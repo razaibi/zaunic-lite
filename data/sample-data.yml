@@ -1,0 +1,6 @@
+data:
+  name: "Raz"
+  options:
+    - item: "somecontent"
+      points:
+        - name: "abcde"
