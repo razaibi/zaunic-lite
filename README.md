@@ -1,6 +1,6 @@
 ### Zaunic Lite
 
-This is Golang based code generator.
+This is Golang based code generator. This is a light weight version that uses _yml_ files and _go.tmpl_ files to generate code.
 
 ### Steps to Setup.
 
@@ -16,7 +16,7 @@ data:
         - name: "abcde"
 ```
 
-2. Setup template for generation in *templates* folder in go.tmpl format.
+2. Setup template for generation in *templates* folder in _go.tmpl_ format.
 
 Sample:
 ```tmpl
@@ -40,7 +40,7 @@ Sample:
 
 ```
 
-3. Create Worksheet to execute/generate in worksheets folder (in yaml format).
+3. Create Worksheet to execute/generate in *worksheets* folder (in _.yml_ format). Worksheet drives the sequence of execution of the code generated.
 
 Sample:
 ```yml
@@ -52,11 +52,13 @@ items:
     output: "sample.html"
 ```
 
+The output value will be appended to the base path of the _output_ folder.
+
 4. In *main.go*, setup the worksheet name you want to run.
 
 Sample:
 ```go
-    core.ProcessWorksheet("<your-worksheet")
+core.ProcessWorksheet("<your-worksheet")
 ```
 
 5. Simply run using:
