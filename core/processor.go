@@ -36,6 +36,6 @@ func ProcessWorksheet(worksheetName string) {
 	var wst models.Worksheet
 	wst, _ = getWorkItems(worksheetName)
 	for _, i := range wst.Items {
-		fmt.Println(i.Name)
+		Generate(i)
 	}
 }
