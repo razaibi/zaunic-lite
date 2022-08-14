@@ -66,3 +66,26 @@ core.ProcessWorksheet("<your-worksheet")
 ```bash
 go run main.go
 ```
+
+
+#### Other commands to get started.
+
+##### Adding a project.
+
+```bash
+./scripts/add_project.sh <name-of-your-project>
+```
+
+##### Adding new template data.
+Add new project with the below script.
+
+```bash
+./scripts/add_data.sh <name-of-your-project>
+```
+
+##### Adding a new template.
+Add new project with the below script.
+
+```bash
+./scripts/add_template.sh <name-of-your-project>
+```
