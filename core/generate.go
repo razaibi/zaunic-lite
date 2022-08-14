@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"text/template"
-	"zaunic-lite/models"
+	"zaunic-lite/core/models"
 
 	"gopkg.in/yaml.v2"
 )

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"path/filepath"
-	"zaunic-lite/models"
+	"zaunic-lite/core/models"
 
 	"gopkg.in/yaml.v2"
 )
