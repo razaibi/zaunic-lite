@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	core.ProcessWorksheet("sample")
+	core.ProcessWorksheet("sample-project", "sample-ws")
 }
