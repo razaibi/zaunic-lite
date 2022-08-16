@@ -4,7 +4,13 @@ This is Golang based code generator. This is a light weight version that uses _y
 
 ### Steps to Setup.
 
-1. Setup Data for Generation in *data* folder in yaml format.
+1. Create your new project using the script. 
+
+```bash
+./scripts/add_project.sh <name-of-your-project>
+```
+
+1. Setup Data for Generation in *projects/<name-of-your-project>/data* folder in yaml format.
 
 Sample:
 ```yml
@@ -16,7 +22,7 @@ data:
         - name: "abcde"
 ```
 
-2. Setup template for generation in *templates* folder in _go.tmpl_ format.
+2. Setup template for generation in *projects/<name-of-your-project>/templates* folder in _go.tmpl_ format.
 
 Sample:
 ```tmpl
@@ -40,7 +46,7 @@ Sample:
 
 ```
 
-3. Create Worksheet to execute/generate in *worksheets* folder (in _.yml_ format). Worksheet drives the sequence of execution of the code generated.
+3. Create Worksheet to execute/generate in *projects/<name-of-your-project>/worksheets* folder (in _.yml_ format). Worksheet drives the sequence of execution of the code generated.
 
 Sample:
 ```yml
@@ -58,7 +64,7 @@ The output value will be appended to the base path of the _output_ folder.
 
 Sample:
 ```go
-core.ProcessWorksheet("<your-worksheet")
+core.ProcessWorksheet("<your-project>","<your-worksheet>")
 ```
 
 5. Simply run using:
@@ -67,14 +73,7 @@ core.ProcessWorksheet("<your-worksheet")
 go run main.go
 ```
 
-
 #### Other commands to get started.
-
-##### Adding a project.
-
-```bash
-./scripts/add_project.sh <name-of-your-project>
-```
 
 ##### Adding new template data.
 Add new project with the below script.
