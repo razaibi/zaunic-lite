@@ -1,13 +1,13 @@
-WORKSHEET_FOLDER=worksheets/$1
+WORKSHEET_FOLDER=projects/$1/worksheets
 mkdir -p $WORKSHEET_FOLDER
-WORKSHEET_PATH=$WORKSHEET_FOLDER/sample_ws.yml
+WORKSHEET_PATH=$WORKSHEET_FOLDER/sample-ws.yml
 
 touch $WORKSHEET_PATH
 
 echo "---
 items:
   - name: \"Generate File.\"
-    data: \"$1\sample-data.yml\"
-    template: \"$1\sample.go.tmpl\"
-    output: \"$1.html\"
+    data: \"sample-data.yml\"
+    template: \"sample.go.tmpl\"
+    output: \"sample.html\"
 " >> $WORKSHEET_PATH
