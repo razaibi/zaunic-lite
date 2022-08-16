@@ -1,6 +1,7 @@
 ---
 items:
-  - name: "Generate Progam.cs."
+  - name: "Generate File."
     data: "sample-data.yml"
     template: "sample.go.tmpl"
     output: "sample.html"
+

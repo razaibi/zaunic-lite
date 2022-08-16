@@ -1,0 +1,9 @@
+---
+data:
+  name: "Some Name Value"
+  items:
+    - name: "First Item Name"
+      place: "First Item Place"
+    - name: "Second Item Name"
+      place: "Second Item Place"
+
