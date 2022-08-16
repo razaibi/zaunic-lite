@@ -9,16 +9,27 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-func getWorksheetPath(worksheetName string) string {
+func getWorksheetPath(
+	projectName string,
+	worksheetName string,
+) string {
 	worksheetPath := filepath.Join(
+		"projects",
+		projectName,
 		"worksheets",
 		fmt.Sprintf("%s.yml", worksheetName),
 	)
 	return worksheetPath
 }
 
-func getWorkItems(worksheetName string) (models.Worksheet, error) {
-	worksheetPath := getWorksheetPath(worksheetName)
+func getWorkItems(
+	projectName string,
+	worksheetName string,
+) (models.Worksheet, error) {
+	worksheetPath := getWorksheetPath(
+		projectName,
+		worksheetName,
+	)
 	yamlFile, err := ioutil.ReadFile(worksheetPath)
 	var wst models.Worksheet
 	if err != nil {
@@ -32,10 +43,16 @@ func getWorkItems(worksheetName string) (models.Worksheet, error) {
 	return wst, nil
 }
 
-func ProcessWorksheet(worksheetName string) {
+func ProcessWorksheet(
+	projectName string,
+	worksheetName string,
+) {
 	var wst models.Worksheet
-	wst, _ = getWorkItems(worksheetName)
+	wst, _ = getWorkItems(
+		projectName,
+		worksheetName,
+	)
 	for _, i := range wst.Items {
-		Generate(i)
+		Generate(projectName, i)
 	}
 }

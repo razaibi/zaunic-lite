@@ -47,15 +47,20 @@ func writeOutput(filepath string, content string) {
 }
 
 func Generate(
+	projectName string,
 	wsi models.Item,
 ) {
 	templateDataFilePath := filepath.Join(
+		"projects",
+		projectName,
 		"data",
 		wsi.Data,
 	)
 
 	templateData, _ := os.ReadFile(templateDataFilePath)
 	templateFilePath := filepath.Join(
+		"projects",
+		projectName,
 		"templates",
 		wsi.Template,
 	)
@@ -64,6 +69,8 @@ func Generate(
 	renderedTemplate := renderTemplate(t, m)
 
 	outputPath := filepath.Join(
+		"projects",
+		projectName,
 		"output",
 		wsi.Output,
 	)
