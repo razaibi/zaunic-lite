@@ -3,29 +3,42 @@ package core
 import (
 	"bytes"
 	"log"
+	"os"
 	"text/template"
 
 	"github.com/osteele/liquid"
 )
 
+func getProcessedTemplate(templatePath string) template.Template {
+	templateContent, _ := os.ReadFile(templatePath)
+	rawTemplate := template.Must(template.New("").Parse(string(templateContent)))
+	return *rawTemplate
+}
+
+func getRawTemplate(templatePath string) string {
+	templateRaw, _ := os.ReadFile(templatePath)
+	return string(templateRaw)
+}
+
 func renderTemplate(
 	engine string,
-	t template.Template,
+	templatePath string,
 	m map[interface{}]interface{},
 ) string {
 	var renderedTemplate string
 	switch engine {
 	case "go":
-		renderedTemplate = renderGoTemplate(t, m)
+		renderedTemplate = renderGoTemplate(templatePath, m)
 	case "liquid":
-		renderedTemplate = renderLiquidTemplate(t, m)
+		renderedTemplate = renderLiquidTemplate(templatePath, m)
 	default:
-		renderedTemplate = renderGoTemplate(t, m)
+		renderedTemplate = renderGoTemplate(templatePath, m)
 	}
 	return renderedTemplate
 }
 
-func renderGoTemplate(t template.Template, m map[interface{}]interface{}) string {
+func renderGoTemplate(templatePath string, m map[interface{}]interface{}) string {
+	t := getProcessedTemplate(templatePath)
 	var templateBuffer bytes.Buffer
 	if err := t.Execute(&templateBuffer, m); err != nil {
 		panic(err)
@@ -35,15 +48,15 @@ func renderGoTemplate(t template.Template, m map[interface{}]interface{}) string
 }
 
 func renderLiquidTemplate(
-	t template.Template,
+	templatePath string,
 	m map[interface{}]interface{},
 ) string {
 	engine := liquid.NewEngine()
-	template := `<h1>{{ page.title }}</h1>`
 	data := map[string]interface{}{
 		"data": m["data"],
 	}
-	out, err := engine.ParseAndRenderString(template, data)
+	t := getRawTemplate(templatePath)
+	out, err := engine.ParseAndRenderString(t, data)
 	if err != nil {
 		log.Fatalln(err)
 	}

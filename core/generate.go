@@ -4,17 +4,10 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"text/template"
 	"zaunic-lite/core/models"
 
 	"gopkg.in/yaml.v2"
 )
-
-func getTemplate(templatePath string) template.Template {
-	templateContent, _ := os.ReadFile(templatePath)
-	rawTemplate := template.Must(template.New("").Parse(string(templateContent)))
-	return *rawTemplate
-}
 
 func getTemplateData(templateData []byte) map[interface{}]interface{} {
 	m := make(map[interface{}]interface{})
@@ -48,16 +41,20 @@ func Generate(
 	)
 
 	templateData, _ := os.ReadFile(templateDataFilePath)
-	templateFilePath := filepath.Join(
+	templatePath := filepath.Join(
 		"projects",
 		projectName,
 		"templates",
 		wsi.Template,
 	)
-	t := getTemplate(templateFilePath)
+
 	m := getTemplateData(templateData)
 
-	renderedTemplate := renderTemplate(wsi.Engine, t, m)
+	renderedTemplate := renderTemplate(
+		wsi.Engine,
+		templatePath,
+		m,
+	)
 
 	outputPath := filepath.Join(
 		"projects",
