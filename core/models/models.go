@@ -8,6 +8,6 @@ type Item struct {
 	Name     string `yaml:"name"`
 	Data     string `yaml:"data"`
 	Template string `yaml:"template"`
-	Engine   string `yaml:"engine" default:"gotemp"`
+	Engine   string `yaml:"engine" default:"go"`
 	Output   string `yaml:"output"`
 }
