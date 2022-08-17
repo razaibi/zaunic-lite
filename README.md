@@ -22,6 +22,8 @@ data:
         - name: "abcde"
 ```
 
+> Always start with data as the root element.
+
 2. Setup template for generation in *projects/<name-of-your-project>/templates* folder in _go.tmpl_ format.
 
 Sample:
@@ -60,6 +62,22 @@ items:
 
 The output value will be appended to the base path of the _output_ folder.
 
+##### Optional
+
+If you intend to use templating engines apart from go templates, you can explicitly mention the engine as shown below:
+
+```yml
+---
+items:
+  - name: "Generate Progam.cs."
+    data: "sample-data.yml"
+    template: "sample.liquid"
+    engine: "liquid"
+    output: "sample-2.html"
+```
+
+> Currently only go templates (.go.tmpl) and liquid templates (.liquid) are supported.
+
 4. In *main.go*, setup the worksheet name you want to run.
 
 Sample:
@@ -88,3 +106,10 @@ Add new project with the below script.
 ```bash
 ./scripts/add_template.sh <name-of-your-project>
 ```
+
+### Knowledge Hub
+
+#### Useful templating plugins for VSCode.
+
+- [Go Lang Template - go.tmpl](https://marketplace.visualstudio.com/items?itemName=jinliming2.vscode-go-template)
+- [Shopify Liquid - .liquid](https://marketplace.visualstudio.com/items?itemName=Shopify.theme-check-vscode)
