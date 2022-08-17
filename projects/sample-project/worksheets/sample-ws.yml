@@ -3,5 +3,6 @@ items:
   - name: "Generate File."
     data: "sample-data.yml"
     template: "sample.go.tmpl"
+    engine: "go"
     output: "sample.html"
 
