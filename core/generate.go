@@ -1,7 +1,6 @@
 package core
 
 import (
-	"bytes"
 	"log"
 	"os"
 	"path/filepath"
@@ -23,15 +22,6 @@ func getTemplateData(templateData []byte) map[interface{}]interface{} {
 		panic(err)
 	}
 	return m
-}
-
-func renderTemplate(t template.Template, m map[interface{}]interface{}) string {
-	var templateBuffer bytes.Buffer
-	if err := t.Execute(&templateBuffer, m); err != nil {
-		panic(err)
-	}
-	result := templateBuffer.String()
-	return result
 }
 
 func writeOutput(filepath string, content string) {
@@ -66,7 +56,8 @@ func Generate(
 	)
 	t := getTemplate(templateFilePath)
 	m := getTemplateData(templateData)
-	renderedTemplate := renderTemplate(t, m)
+
+	renderedTemplate := renderTemplate(wsi.Engine, t, m)
 
 	outputPath := filepath.Join(
 		"projects",
