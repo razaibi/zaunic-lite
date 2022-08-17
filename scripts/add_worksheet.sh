@@ -10,4 +10,10 @@ items:
     data: \"sample-data.yml\"
     template: \"sample.go.tmpl\"
     output: \"sample.html\"
+
+  - name: \"Generate using Liquid File.\"
+    data: \"sample-data.yml\"
+    template: \"sample.liquid\"
+    engine: \"liquid\"
+    output: \"sample-liquid.html\"
 " >> $WORKSHEET_PATH
