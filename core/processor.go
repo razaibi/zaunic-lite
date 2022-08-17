@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"path/filepath"
+	"sync"
 	"zaunic-lite/core/models"
 
 	"gopkg.in/yaml.v2"
@@ -52,7 +53,19 @@ func ProcessWorksheet(
 		projectName,
 		worksheetName,
 	)
+
+	//Added processing using waitgroup.
+	var wg sync.WaitGroup
+	wg.Add(len(wst.Items))
 	for _, i := range wst.Items {
-		Generate(projectName, i)
+		go func(
+			projectName string,
+			i models.Item,
+		) {
+			defer wg.Done()
+			Generate(projectName, i)
+		}(projectName, i)
+
 	}
+	wg.Wait()
 }
