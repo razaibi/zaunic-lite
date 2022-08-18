@@ -10,7 +10,7 @@ This is Golang based code generator. This is a light weight version that uses _y
 ./scripts/add_project.sh <name-of-your-project>
 ```
 
-1. Setup Data for Generation in *projects/<name-of-your-project>/data* folder in yaml format.
+2. Setup Data for Generation in *projects/<name-of-your-project>/data* folder in yaml format.
 
 Sample:
 ```yml
@@ -24,9 +24,9 @@ data:
 
 > Always start with data as the root element.
 
-2. Setup template for generation in *projects/<name-of-your-project>/templates* folder in _go.tmpl_ format.
+2. Setup template for generation in *projects/<name-of-your-project>/templates* folder. You can choose between the *go templating engine* (_go.tmpl_ format) and *liquid templating* (_.liquid_ format). 
 
-Sample:
+Sample Go Template:
 ```tmpl
 <html>
 	<head>
@@ -45,8 +45,17 @@ Sample:
 
 	</body>
 </html>
-
 ```
+
+Sample Liquid Template:
+```liquid
+Single Item: {{ data.name }}
+Item List:
+{% for item in data.items %}
+    - {{ item.name }}
+{% endfor %}
+```
+
 
 3. Create Worksheet to execute/generate in *projects/<name-of-your-project>/worksheets* folder (in _.yml_ format). Worksheet drives the sequence of execution of the code generated.
 
