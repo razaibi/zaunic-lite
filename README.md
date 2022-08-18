@@ -24,7 +24,7 @@ data:
 
 > Always start with data as the root element.
 
-2. Setup template for generation in *projects/<name-of-your-project>/templates* folder. You can choose between the *go templating engine* (_go.tmpl_ format) and *liquid templating* (_.liquid_ format). 
+3. Setup template for generation in *projects/<name-of-your-project>/templates* folder. You can choose between the *go templating engine* (_go.tmpl_ format) and *liquid templating* (_.liquid_ format). 
 
 Sample Go Template:
 ```tmpl
@@ -57,7 +57,7 @@ Item List:
 ```
 
 
-3. Create Worksheet to execute/generate in *projects/<name-of-your-project>/worksheets* folder (in _.yml_ format). Worksheet drives the sequence of execution of the code generated.
+4. Create Worksheet to execute/generate in *projects/<name-of-your-project>/worksheets* folder (in _.yml_ format). Worksheet drives the sequence of execution of the code generated.
 
 Sample:
 ```yml
@@ -87,14 +87,14 @@ items:
 
 > Currently only go templates (.go.tmpl) and liquid templates (.liquid) are supported.
 
-4. In *main.go*, setup the worksheet name you want to run.
+5. In *main.go*, setup the worksheet name you want to run.
 
 Sample:
 ```go
 core.ProcessWorksheet("<your-project>","<your-worksheet>")
 ```
 
-5. Simply run using:
+6. Simply run using:
 
 ```bash
 go run main.go
