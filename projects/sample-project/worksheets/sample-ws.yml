@@ -11,3 +11,21 @@ items:
     engine: "liquid"
     output: "sample-liquid.html"
 
+  - name: "Generate using Pongo File."
+    data: "sample-data.yml"
+    template: "sample.pongo"
+    engine: "pongo"
+    output: "sample-pongo.html"
+
+  - name: "Generate using Mustache File."
+    data: "sample-data.yml"
+    template: "sample.mustache"
+    engine: "mustache"
+    output: "sample-mustache.html"
+
+  - name: "Generate using Handlebars File."
+    data: "sample-data.yml"
+    template: "sample.hbs"
+    engine: "handlebars"
+    output: "sample-hbs.html"
+
