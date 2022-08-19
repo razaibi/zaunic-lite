@@ -1,6 +1,6 @@
 TEMP_FOLDER=projects/$1/templates
 mkdir -p $TEMP_FOLDER
-TEMP_PATH=$TEMP_FOLDER/sample.liquid
+TEMP_PATH=$TEMP_FOLDER/sample.pongo
 
 # Add Liquid Template
 touch $TEMP_PATH
