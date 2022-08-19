@@ -85,7 +85,12 @@ items:
     output: "sample-2.html"
 ```
 
-> Currently only go templates (.go.tmpl) and liquid templates (.liquid) are supported.
+> Currently the following template types are supported:
+
+- *Go Templates* (.go.tmpl), 
+- *Liquid* (.liquid)
+- *Pongo* (.pongo)
+- *Mustache* (.mustache)
 
 5. In *main.go*, setup the worksheet name you want to run.
 
@@ -121,4 +126,11 @@ Add new project with the below script.
 #### Useful templating plugins for VSCode.
 
 - [Go Lang Template - go.tmpl](https://marketplace.visualstudio.com/items?itemName=jinliming2.vscode-go-template)
+
 - [Shopify Liquid - .liquid](https://marketplace.visualstudio.com/items?itemName=Shopify.theme-check-vscode)
+
+- [Mustache Template - .mustache](https://marketplace.visualstudio.com/items?itemName=dawhite.mustache)
+
+#### Other Templating engine links.
+
+- [Pongo - .pongo](https://github.com/flosch/pongo2)
