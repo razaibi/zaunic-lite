@@ -1,7 +1,8 @@
 package models
 
 type Worksheet struct {
-	Items []Item `yaml:"items"`
+	Secrets []Secret `yaml:"secrets"`
+	Items   []Item   `yaml:"items"`
 }
 
 type Item struct {
@@ -10,4 +11,11 @@ type Item struct {
 	Template string `yaml:"template"`
 	Engine   string `yaml:"engine" default:"go"`
 	Output   string `yaml:"output"`
+}
+
+type Secret struct {
+	Name      string `yaml:"name"`
+	Source    string `yaml:"source"`
+	Url       string `yaml:"url"`
+	EnvPrefix string `yaml:"env-prefix"`
 }
