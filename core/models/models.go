@@ -14,8 +14,8 @@ type Item struct {
 }
 
 type Secret struct {
-	Name      string `yaml:"name"`
-	Source    string `yaml:"source"`
-	Url       string `yaml:"url"`
-	EnvPrefix string `yaml:"env-prefix"`
+	Name   string `yaml:"name"`
+	Source string `yaml:"source"`
+	Env    string `yaml:"env"`
+	Region string `yaml:"region"`
 }
