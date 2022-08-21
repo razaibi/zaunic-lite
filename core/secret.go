@@ -1,0 +1,72 @@
+package core
+
+import (
+	"fmt"
+	"log"
+	"os"
+	"strings"
+	"zaunic-lite/core/models"
+
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/credentials"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/secretsmanager"
+)
+
+func isEnvVar(envVal string) bool {
+	_, present := os.LookupEnv(envVal)
+	return present
+}
+
+func getCloudSecrets(secrets []models.Secret) {
+	for _, s := range secrets {
+		switch strings.ToUpper(s.Source) {
+		case "AWS":
+			getAWSSecret(
+				s.Name,
+				s.Env,
+				s.Region,
+			)
+		}
+	}
+}
+
+func getAWSSecret(
+	secretName string,
+	envPrefix string,
+	region string,
+) string {
+
+	accessKeyName := fmt.Sprintf(
+		"AWS_%s_ACCESS_KEY_ID",
+		envPrefix,
+	)
+
+	secretKeyName := fmt.Sprintf(
+		"AWS_%s_SECRET_KEY_ID",
+		envPrefix,
+	)
+
+	if !isEnvVar(accessKeyName) && !isEnvVar(secretKeyName) {
+		return ""
+	}
+
+	sess := session.Must(session.NewSession(&aws.Config{
+		Region: aws.String(region),
+		Credentials: credentials.NewStaticCredentials(
+			accessKeyName,
+			secretKeyName,
+			"",
+		),
+	}))
+
+	svc := secretsmanager.New(sess, aws.NewConfig().WithRegion(region))
+
+	result, err := svc.GetSecretValue(&secretsmanager.GetSecretValueInput{SecretId: &secretName})
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	return *result.SecretString
+
+}
