@@ -24,7 +24,7 @@ func getCloudSecrets(secrets []models.Secret) {
 		case "AWS":
 			getAWSSecret(
 				s.Name,
-				s.Env,
+				strings.ToUpper(s.Env),
 				s.Region,
 			)
 		}
@@ -33,29 +33,35 @@ func getCloudSecrets(secrets []models.Secret) {
 
 func getAWSSecret(
 	secretName string,
-	envPrefix string,
+	env string,
 	region string,
 ) string {
 
 	accessKeyName := fmt.Sprintf(
 		"AWS_%s_ACCESS_KEY_ID",
-		envPrefix,
+		env,
 	)
 
 	secretKeyName := fmt.Sprintf(
-		"AWS_%s_SECRET_KEY_ID",
-		envPrefix,
+		"AWS_%s_SECRET_ACCESS_KEY",
+		env,
 	)
 
-	if !isEnvVar(accessKeyName) && !isEnvVar(secretKeyName) {
+	var accessKeyId string
+	var secretAccessKey string
+
+	if isEnvVar(accessKeyName) && isEnvVar(secretKeyName) {
+		accessKeyId = os.Getenv(accessKeyName)
+		secretAccessKey = os.Getenv(secretKeyName)
+	} else {
 		return ""
 	}
 
 	sess := session.Must(session.NewSession(&aws.Config{
 		Region: aws.String(region),
 		Credentials: credentials.NewStaticCredentials(
-			accessKeyName,
-			secretKeyName,
+			accessKeyId,
+			secretAccessKey,
 			"",
 		),
 	}))
