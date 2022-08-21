@@ -54,6 +54,9 @@ func ProcessWorksheet(
 		worksheetName,
 	)
 
+	//Get secrets from worksheet.
+	getCloudSecrets(wst.Secrets)
+
 	//Added processing using waitgroup.
 	var wg sync.WaitGroup
 	wg.Add(len(wst.Items))
