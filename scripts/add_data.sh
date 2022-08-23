@@ -1,4 +1,4 @@
-DATA_FOLDER=projects/$1/data
+DATA_FOLDER=_projects/$1/data
 mkdir -p $DATA_FOLDER
 DATA_PATH=$DATA_FOLDER/sample-data.yml
 

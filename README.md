@@ -10,7 +10,7 @@ This is Golang based code generator. This is a light weight version that uses _y
 ./scripts/add_project.sh <name-of-your-project>
 ```
 
-2. Setup Data for Generation in *projects/<name-of-your-project>/data* folder in yaml format.
+2. Setup Data for Generation in *_projects/<name-of-your-project>/data* folder in yaml format.
 
 Sample:
 ```yml
@@ -24,7 +24,7 @@ data:
 
 > Always start with data as the root element.
 
-3. Setup template for generation in *projects/<name-of-your-project>/templates* folder. You can choose between the *go templating engine* (_go.tmpl_ format) and *liquid templating* (_.liquid_ format). 
+3. Setup template for generation in *_projects/<name-of-your-project>/templates* folder. You can choose between the *go templating engine* (_go.tmpl_ format) and *liquid templating* (_.liquid_ format). 
 
 Sample Go Template:
 ```tmpl
@@ -57,7 +57,7 @@ Item List:
 ```
 
 
-4. Create Worksheet to execute/generate in *projects/<name-of-your-project>/worksheets* folder (in _.yml_ format). Worksheet drives the sequence of execution of the code generated.
+4. Create Worksheet to execute/generate in *_projects/<name-of-your-project>/worksheets* folder (in _.yml_ format). Worksheet drives the sequence of execution of the code generated.
 
 Sample:
 ```yml
@@ -122,6 +122,33 @@ Add new project with the below script.
 ```
 
 ### Knowledge Hub
+
+#### Secrets Management
+
+- Zaunic-Lite supports pulling secrets from cloud and embedding it into your generated code.
+
+- To do this, your environment variables are used.
+
+- Let us take an example to illustrate. If you have your AWS access key id and secret key stored as environment variables, you can use them to pull up your secrets like below.
+
+```yml
+secrets:
+  - name: "some-awesome-secret"
+    source: "aws"
+    url: "secrets.aws.com"
+    env-prefix: "prod" 
+```
+
+Core will start looking environment variables.
+
+- Ensure these environment variables (in all caps) are set based on the cloud provider.
+
+For AWS, 
+
+```bash
+AWS_<your-environment-name>_ACCESS_KEY_ID
+AWS_<your-environment-name>_SECRET_ACCESS_KEY
+```
 
 #### Useful templating plugins for VSCode.
 

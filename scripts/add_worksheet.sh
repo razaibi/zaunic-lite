@@ -1,4 +1,4 @@
-WORKSHEET_FOLDER=projects/$1/worksheets
+WORKSHEET_FOLDER=_projects/$1/worksheets
 mkdir -p $WORKSHEET_FOLDER
 WORKSHEET_PATH=$WORKSHEET_FOLDER/sample-ws.yml
 

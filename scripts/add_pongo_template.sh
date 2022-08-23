@@ -1,4 +1,4 @@
-TEMP_FOLDER=projects/$1/templates
+TEMP_FOLDER=_projects/$1/templates
 mkdir -p $TEMP_FOLDER
 TEMP_PATH=$TEMP_FOLDER/sample.pongo
 
