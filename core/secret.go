@@ -18,17 +18,19 @@ func isEnvVar(envVal string) bool {
 	return present
 }
 
-func getCloudSecrets(secrets []models.Secret) {
+func getCloudSecrets(secrets []models.Secret) map[string]interface{} {
+	secretsMap := make(map[string]interface{})
 	for _, s := range secrets {
 		switch strings.ToUpper(s.Source) {
 		case "AWS":
-			getAWSSecret(
+			secretsMap[s.Name] = getAWSSecret(
 				s.Name,
 				strings.ToUpper(s.Env),
 				s.Region,
 			)
 		}
 	}
+	return secretsMap
 }
 
 func getAWSSecret(

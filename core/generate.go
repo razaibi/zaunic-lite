@@ -34,7 +34,7 @@ func Generate(
 	wsi models.Item,
 ) {
 	templateDataFilePath := filepath.Join(
-		"projects",
+		"_projects",
 		projectName,
 		"data",
 		wsi.Data,
@@ -42,13 +42,14 @@ func Generate(
 
 	templateData, _ := os.ReadFile(templateDataFilePath)
 	templatePath := filepath.Join(
-		"projects",
+		"_projects",
 		projectName,
 		"templates",
 		wsi.Template,
 	)
 
 	m := getTemplateData(templateData)
+	m["secrets"] = wsi.Secrets
 
 	renderedTemplate := renderTemplate(
 		wsi.Engine,
@@ -57,7 +58,7 @@ func Generate(
 	)
 
 	outputPath := filepath.Join(
-		"projects",
+		"_projects",
 		projectName,
 		"output",
 		wsi.Output,

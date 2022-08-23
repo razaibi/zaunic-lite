@@ -15,7 +15,7 @@ func getWorksheetPath(
 	worksheetName string,
 ) string {
 	worksheetPath := filepath.Join(
-		"projects",
+		"_projects",
 		projectName,
 		"worksheets",
 		fmt.Sprintf("%s.yml", worksheetName),
@@ -55,7 +55,8 @@ func ProcessWorksheet(
 	)
 
 	//Get secrets from worksheet.
-	getCloudSecrets(wst.Secrets)
+	secretsMap := make(map[string]interface{})
+	secretsMap = getCloudSecrets(wst.Secrets)
 
 	//Added processing using waitgroup.
 	var wg sync.WaitGroup
@@ -66,6 +67,7 @@ func ProcessWorksheet(
 			i models.Item,
 		) {
 			defer wg.Done()
+			i.Secrets = secretsMap
 			Generate(projectName, i)
 		}(projectName, i)
 

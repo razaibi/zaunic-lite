@@ -8,6 +8,7 @@ type Worksheet struct {
 type Item struct {
 	Name     string `yaml:"name"`
 	Data     string `yaml:"data"`
+	Secrets  map[string]interface{}
 	Template string `yaml:"template"`
 	Engine   string `yaml:"engine" default:"go"`
 	Output   string `yaml:"output"`
