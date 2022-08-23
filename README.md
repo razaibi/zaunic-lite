@@ -135,8 +135,8 @@ Add new project with the below script.
 secrets:
   - name: "some-awesome-secret"
     source: "aws"
-    url: "secrets.aws.com"
-    env-prefix: "prod" 
+    env: "dev"
+    region: "us-east-1"
 ```
 
 Core will start looking environment variables.
