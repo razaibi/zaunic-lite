@@ -1,0 +1,28 @@
+package main
+
+import (
+	"log"
+	"net/http"
+
+	"github.com/gorilla/mux"
+)
+
+func initializeRouter() {
+	r := mux.NewRouter()
+
+    {% for table in data.tables %}
+    r.HandleFunc("/{{ table.singular }}", Get{{ table.plural | capitalize }}).Methods("GET")
+    r.HandleFunc("/{{ table.plural }}/{id}", Get{{ table.singular | capitalize }}).Methods("GET")
+	r.HandleFunc("/{{ table.plural }}", Create{{ table.singular | capitalize }}).Methods("POST")
+	r.HandleFunc("/{{ table.plural }}/{id}", Update{{ table.singular | capitalize }}).Methods("PUT")
+	r.HandleFunc("/{{ table.plural }}/{id}", Delete{{ table.singular | capitalize }}).Methods("DELETE")
+	{% endfor %}
+
+	log.Fatal(http.ListenAndServe(":{{ data.port }}", r))
+}
+
+func main() {
+	InitialMigration()
+	initializeRouter()
+}
+

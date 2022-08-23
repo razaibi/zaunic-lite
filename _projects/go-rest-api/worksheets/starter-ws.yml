@@ -1,0 +1,9 @@
+---
+items:
+
+  - name: "Generate main.go."
+    data: "entity_data.yml"
+    template: "main.liquid"
+    engine: "liquid"
+    output: "main.go"
+
