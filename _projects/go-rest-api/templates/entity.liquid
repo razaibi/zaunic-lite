@@ -1,0 +1,73 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"net/http"
+
+	"github.com/gorilla/mux"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
+)
+
+var DB *gorm.DB
+var err error
+
+const connString = "root:adminuser@tcp(127.0.0.1:3306)/godb?charset=utf8mb4&parseTime=True&loc=Local"
+
+type {{ data.singular | capitalize }} struct {
+	gorm.Model
+	{% for item in data.attribs %}	
+		{{-item.name }} {{ item.type }} `json:"{{ item.jsonName-}}"`
+	{% endfor %}
+}
+
+func InitialMigration() {
+	DB, err = gorm.Open(mysql.Open(connString), &gorm.Config{})
+	if err != nil {
+		fmt.Println(err.Error())
+		panic("Cannot connect to DB")
+	}
+	DB.AutoMigrate(&{{ data.singular | capitalize }}{})
+}
+
+func Get{{ data.plural | capitalize }}(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	var {{ data.plural }} []{{ data.singular | capitalize }}
+	DB.Find(&{{ data.plural }})
+	json.NewEncoder(w).Encode({{ data.plural }})
+}
+
+func Get{{ data.singular | capitalize }}(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r)
+	var {{ data.singular }} {{ data.singular | capitalize }}
+	DB.First(&{{ data.singular }}, params["id"])
+	json.NewEncoder(w).Encode({{ data.singular }})
+}
+
+func Create{{ data.singular | capitalize }}(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	var {{ data.singular }} {{ data.singular | capitalize }}
+	json.NewDecoder(r.Body).Decode(&{{ data.singular }})
+	DB.Create(&{{ data.singular }})
+	json.NewEncoder(w).Encode({{ data.singular }})
+}
+
+func Update{{ data.singular | capitalize }}(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r)
+	var {{ data.singular }} {{ data.singular | capitalize }}
+	DB.First(&{{ data.singular }}, params["id"])
+	json.NewDecoder(r.Body).Decode(&{{ data.singular }})
+	DB.Save(&{{ data.singular }})
+	json.NewEncoder(w).Encode({{ data.singular }})
+}
+
+func Delete{{ data.singular | capitalize }}(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r)
+	var {{ data.singular }} {{ data.singular | capitalize }}
+	DB.Delete(&{{ data.singular }}, params["id"])
+	json.NewEncoder(w).Encode("The {{ data.singular | capitalize }} is Deleted Successfully!")
+}

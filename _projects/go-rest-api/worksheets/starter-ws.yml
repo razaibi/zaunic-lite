@@ -2,8 +2,14 @@
 items:
 
   - name: "Generate main.go."
-    data: "entity_data.yml"
+    data: "api_data.yml"
     template: "main.liquid"
     engine: "liquid"
     output: "main.go"
+
+  - name: "Generate user.go."
+    data: "user_data.yml"
+    template: "entity.liquid"
+    engine: "liquid"
+    output: "user.go"
 

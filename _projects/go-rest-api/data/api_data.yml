@@ -1,0 +1,11 @@
+---
+data:
+  name: "Golang REST API"
+  port: 9000
+  tables:
+    - name: "user"
+      singular: "user"
+      plural: "users"
+      
+       
+

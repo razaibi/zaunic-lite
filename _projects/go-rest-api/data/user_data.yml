@@ -1,0 +1,15 @@
+---
+data:
+  name: "user"
+  singular: "user"
+  plural: "users"
+  attribs:
+   - name: "FirstName"
+     type: "string"
+     jsonName: "firstname"
+   - name: "LastName"
+     type: "string"
+     jsonName: "lastname"
+   - name: "Email"
+     type: "string"
+     jsonName: "email"
