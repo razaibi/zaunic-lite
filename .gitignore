@@ -22,3 +22,8 @@ models/*
 
 # Go workspace file
 go.work
+
+# Environment Variables
+*.env
+setenv.sh
+env.sh
