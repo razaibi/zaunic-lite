@@ -13,8 +13,6 @@ import (
 var DB *gorm.DB
 var err error
 
-const connString = "root:adminuser@tcp(127.0.0.1:3306)/godb?charset=utf8mb4&parseTime=True&loc=Local"
-
 type User struct {
 	gorm.Model
 	FirstName string `json:"firstname"`

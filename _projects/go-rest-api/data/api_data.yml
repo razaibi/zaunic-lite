@@ -2,6 +2,7 @@
 data:
   name: "Golang REST API"
   port: 9000
+  dbConnection: "root:adminuser@tcp(127.0.0.1:3306)/sampledb?charset=utf8mb4&parseTime=True&loc=Local"
   tables:
     - name: "user"
       singular: "user"

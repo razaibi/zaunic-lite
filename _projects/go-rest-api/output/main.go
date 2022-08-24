@@ -7,6 +7,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
+const connString = "root:adminuser@tcp(127.0.0.1:3306)/sampledb?charset=utf8mb4&parseTime=True&loc=Local"
+
 func initializeRouter() {
 	r := mux.NewRouter()
 
