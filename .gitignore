@@ -27,3 +27,7 @@ go.work
 *.env
 setenv.sh
 env.sh
+
+_projects/test-project-1
+_projects/test-project-2
+_projects/test-project-3
