@@ -139,15 +139,29 @@ secrets:
     region: "us-east-1"
 ```
 
-Core will start looking environment variables.
+Core will start looking for *environment variables*.
 
 - Ensure these environment variables (in all caps) are set based on the cloud provider.
 
 For AWS, 
 
 ```bash
-AWS_<your-environment-name>_ACCESS_KEY_ID
-AWS_<your-environment-name>_SECRET_ACCESS_KEY
+AWS_<your-environment-name>_ACCESS_KEY_ID=<your-access-key-id>
+AWS_<your-environment-name>_SECRET_ACCESS_KEY=<your-secret-access-key>
+```
+
+- Usage in Templates
+
+In Liquid templates (sample secret name: appcred),
+
+```liquid
+Sample Secret: {{ secrets.appcred }}
+```
+
+In Go Templates (sample secret name: appcred),
+
+```tmpl
+Sample Secret: {{index .secrets "appcred"}}
 ```
 
 #### Useful templating plugins for VSCode.
